@@ -2,11 +2,11 @@ import functools
 import db
 import pymysql
 
-def get_users():
+def get_MASCOTA():
     con = db.get_connection()
     cursor = con.cursor(pymysql.cursors.DictCursor)
     try:
-        sql="SELECT * FROM users"
+        sql="SELECT * FROM MASCOTA"
         cursor.execute(sql)
         ret = cursor.fetchall()
         print(ret)
@@ -14,23 +14,23 @@ def get_users():
     finally:
         con.close()
 
-def get_user(user_id):
+def get_mascotas(idMascota):
     con = db.get_connection() 
     cursor = con.cursor(pymysql.cursors.DictCursor)
     ret={}
     try:
-        sql="SELECT * FROM users WHERE id = {}".format(user_id)
+        sql="SELECT * FROM MASCOTA WHERE idMASCOTA = {}".format(idMascota)
         cursor.execute(sql)
         ret = cursor.fetchone()
         return ret
     finally:
         con.close()
 
-def create_user(name, lastname):
+def create_mascota(Nombre_Mascota,Especie,Raza, Genero, Tipo_de_Sangre, Edad, Estado):
     con = db.get_connection()
     cursor = con.cursor()
     try:
-        sql="INSERT INTO users(name, lastname) VALUES('{}','{}')".format(name, lastname)
+        sql="INSERT INTO MASCOTA (Nombre_Mascota,Especie, Raza, Genero, Tipo_de_Sangre, Edad, Estado) VALUES('{}','{}', '{}','{}','{}','{}','{}')".format(Nombre_Mascota,Especie, Raza, Genero, Tipo_de_Sangre, Edad, Estado)
         print(sql)
         cursor.execute(sql)
         con.commit()
@@ -39,11 +39,11 @@ def create_user(name, lastname):
     finally:
         con.close()
 
-def update_user(name, lastname, user_id):
+def update_mascota(Nombre_Mascota, Edad, Estado,idMascota):
     con = db.get_connection()
     cursor = con.cursor()
     try:
-        sql="UPDATE users set name='{0}', lastname='{1}' WHERE id = {2}".format(name, lastname, user_id)
+        sql="UPDATE MASCOTA set Nombre_Mascota='{0}', Edad='{1}',Estado='{2}'  WHERE idMASCOTA = {3}".format(Nombre_Mascota, Edad, Estado,idMascota)
         print(sql)
         cursor.execute(sql)
         con.commit()
@@ -51,11 +51,11 @@ def update_user(name, lastname, user_id):
     finally:
         con.close()
 
-def delete_user(user_id):
+def delete_mascota(idMascota):
     con = db.get_connection()
     cursor = con.cursor()
     try:
-        sql="DELETE FROM users WHERE id = {}".format(user_id)
+        sql="DELETE FROM MASCOTA WHERE idMASCOTA = {}".format(idMascota)
         cursor.execute(sql)
         con.commit()
         return {"message":"OK"}

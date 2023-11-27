@@ -10,31 +10,39 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema db_companies
 -- -----------------------------------------------------
-
+USE companies;
 -- -----------------------------------------------------
 -- Table `companies`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `companies` ;
 
-CREATE TABLE IF NOT EXISTS `companies` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
-  `description` TEXT NULL,
-  PRIMARY KEY (`id`))
+CREATE TABLE IF NOT EXISTS `CLIENTE` (
+  `idCliente` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Apellido` VARCHAR(45) NOT NULL,
+  `Telefono` VARCHAR(10) NOT NULL,
+  `Direccion` VARCHAR(45) NOT NULL,
+  `Nombre_Mascota` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idCliente`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
-  `lastname` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`))
+CREATE TABLE IF NOT EXISTS `MASCOTA` (
+  `idMASCOTA` INT NOT NULL AUTO_INCREMENT,
+  `Nombre_Mascota` VARCHAR(45) NOT NULL,
+  `Especie` VARCHAR(45) NOT NULL,
+  `Raza` VARCHAR(45) NOT NULL,
+  `Genero` VARCHAR(45) NOT NULL,
+  `Tipo_de_Sangre` VARCHAR(45) NOT NULL,
+  `Edad` INT NOT NULL,
+  `Estado` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idMASCOTA`))
 ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-INSERT INTO companies(name, description) VALUES('Company 1','My company');
-INSERT INTO companies(name, description) VALUES('Company 2','Another company');
-INSERT INTO users(name, lastname) VALUES('Lucas','Perez');
-INSERT INTO users(name, lastname) VALUES('Luisa','Giraldo');
+INSERT INTO CLIENTE(idCliente,Nombre, Apellido, Telefono, Direccion, Nombre_Mascota ) VALUES(3,'Juan','Perez','1234567890' ,'Kennedy', 'Penny');
+INSERT INTO CLIENTE(idCliente,Nombre, Apellido, Telefono, Direccion, Nombre_Mascota ) VALUES(2,'Marta','Vasquez', '320870898','Palanquero', 'Boss');
+INSERT INTO MASCOTA(Nombre_Mascota, Especie, Raza,Genero, Tipo_de_Sangre, Edad, Estado) VALUES('Penny','Gato', 'Persa', 'Femenino', 'AB', 1, 'Donante');
+INSERT INTO MASCOTA(Nombre_Mascota, Especie, Raza,Genero, Tipo_de_Sangre, Edad, Estado) VALUES('Boss','Perro', 'Bullterrier', 'Masculino', 'DEA1', 2, 'Receptor');
